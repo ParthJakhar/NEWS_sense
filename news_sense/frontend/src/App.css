@@ -1,0 +1,105 @@
+.news-container {
+  text-align: center;
+  padding: 2rem;
+  font-family: "Segoe UI", sans-serif;
+  color: #222;
+  background: #fafafa;
+  min-height: 100vh;
+}
+
+.news-grid {
+  display: grid;
+  gap: 1.5rem;
+  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  margin-top: 6rem;
+
+}
+
+.news-card {
+  background: #fff;
+  border-radius: 1rem;
+  padding: 1rem;
+  box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+  transition: transform 0.2s ease;
+}
+
+.news-card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+}
+
+.news-img {
+  width: 100%;
+  border-radius: 0.8rem;
+  margin-bottom: 0.75rem;
+}
+
+.headline-link {
+  text-decoration: none;
+  color: #000000;
+  font-weight: 600;
+}
+
+
+
+.discuss-button {
+  margin-top: 0.8rem;
+  padding: 0.6rem 1rem;
+  border: none;
+  border-radius: 0.6rem;
+  cursor: pointer;
+  font-weight: 500;
+  transition: background 0.2s ease;
+}
+
+.discuss-button.active {
+  background: #ff4500;
+  color: white;
+}
+
+.discuss-button.active:hover {
+  background: #e03d00;
+}
+
+.discuss-button.disabled {
+  background: #ccc;
+  color: #666;
+  cursor: not-allowed;
+}
+
+/* Loading spinner */
+.loading-screen {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+}
+
+.spinner {
+  border: 5px solid #ddd;
+  border-top: 5px solid #0073e6;
+  border-radius: 50%;
+  width: 50px;
+  height: 50px;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  to { transform: rotate(360deg); }
+}
+
+.error-message {
+  text-align: center;
+  margin-top: 4rem;
+}
+
+.error-message button {
+  margin-top: 1rem;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  background: #0073e6;
+  color: white;
+  border-radius: 0.6rem;
+  cursor: pointer;
+}
