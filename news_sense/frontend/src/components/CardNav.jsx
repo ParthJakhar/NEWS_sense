@@ -3,6 +3,7 @@ import { gsap } from 'gsap';
 // use your own icon import if react-icons is not available
 import { GoArrowUpRight } from 'react-icons/go';
 import './CardNav.css';
+import GlareHover from './GlareHover'
 
 const CardNav = ({
   logo,
@@ -152,6 +153,9 @@ const CardNav = ({
           <div className="logo-container">
             <img src={logo} alt={logoAlt} className="logo" />
           </div>
+          <div style={{ height: '600px', position: 'relative' }}>
+  
+</div>
 
           <button
             type="button"
