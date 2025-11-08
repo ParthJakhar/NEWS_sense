@@ -15,7 +15,7 @@
   border-radius: 1rem;
   box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
   overflow: hidden;
-  transition: height 0.4s ease;
+  transition: height 0.1s ease;
   position: relative;
 }
 
@@ -72,7 +72,7 @@
   padding: 0.4rem 1rem;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.3s ease;
+  transition: background 0.2s ease;
 }
 
 .card-nav-cta-button:hover {

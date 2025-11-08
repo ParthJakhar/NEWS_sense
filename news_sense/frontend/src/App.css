@@ -53,12 +53,13 @@
 }
 
 .discuss-button.active {
-  background: #ff4500;
+  background: #dd4d19;
   color: white;
 }
 
 .discuss-button.active:hover {
-  background: #e03d00;
+  background: #ffffff;
+  color:#dd4d19
 }
 
 .discuss-button.disabled {

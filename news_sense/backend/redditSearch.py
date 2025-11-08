@@ -4,12 +4,15 @@ import json
 import os
 from datetime import datetime
 from scraper import get_headlines
+import load_dotenv from dotenv
 
-MY_API_KEY = "AIzaSyD5_iZ5e4255ON4psTF9E0MJkWijXjLvkA"
-MY_SEARCH_ENGINE_ID = "f27d346e9f47943cf"
+load_dotenv()
+
+MY_API_KEY = os.getenv("MY_API_KEY")
+MY_SEARCH_ENGINE_ID = os.getenv("MY_SEARCH_ENGINE_ID")
 CACHE_FILE = "cache.json"
 MAX_REQUESTS_PER_DAY = 100
-MAX_HEADLINES = 5  # Limit per request
+MAX_HEADLINES = 70  # Limit per request
 
 
 def load_cache():
