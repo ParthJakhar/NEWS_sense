@@ -17,12 +17,24 @@ export default function Dashboard() {
       ],
     },
     {
-      label: "Reddit",
+      label: "Categories",
       bgColor: "#08121fff",
       textColor: "#ffffffff",
       links: [
         {
-          label: "Trending Threads",
+          label: "World",          
+          ariaLabel: "https://reddit.com",
+        },
+        {
+          label: "Entertainment",          
+          ariaLabel: "https://reddit.com",
+        },
+        {
+          label: "Sports",          
+          ariaLabel: "https://reddit.com",
+        },
+        {
+          label: "business",          
           ariaLabel: "https://reddit.com",
         },
       ],

@@ -4,14 +4,14 @@ import json
 import os
 from datetime import datetime
 from scraper import get_headlines
-import load_dotenv from dotenv
+from dotenv import load_dotenv
 
 load_dotenv()
 
 MY_API_KEY = os.getenv("MY_API_KEY")
 MY_SEARCH_ENGINE_ID = os.getenv("MY_SEARCH_ENGINE_ID")
 CACHE_FILE = "cache.json"
-MAX_REQUESTS_PER_DAY = 100
+MAX_REQUESTS_PER_DAY = 1000
 MAX_HEADLINES = 70  # Limit per request
 
 
@@ -20,8 +20,12 @@ def load_cache():
     if not os.path.exists(CACHE_FILE):
         return {"date": str(datetime.now().date()), "count": 0, "data": {}}
 
-    with open(CACHE_FILE, "r") as f:
-        cache = json.load(f)
+    try:
+        with open(CACHE_FILE, "r") as f:
+            cache = json.load(f)
+    except json.JSONDecodeError:
+        print("⚠️ Cache file corrupted. Rebuilding new cache.")
+        cache = {"date": str(datetime.now().date()), "count": 0, "data": {}}
 
     # Reset daily count if it's a new day
     if cache["date"] != str(datetime.now().date()):
@@ -59,6 +63,7 @@ async def get_first_reddit_link(search_query, client):
         print(f"Error during search for '{search_query}': {e}")
         return None
 
+
 async def get_reddit_links():
     """Get Reddit links with caching and rate limiting."""
     headlines = get_headlines()[:MAX_HEADLINES]
@@ -67,8 +72,13 @@ async def get_reddit_links():
     results = []
     async with httpx.AsyncClient(timeout=10) as client:
         for item in headlines:
-            # Extract actual headline text
-            headline_text = item["headline"] if isinstance(item, dict) else item
+            # Extract headline and its link (if available)
+            if isinstance(item, dict):
+                headline_text = item.get("headline", "")
+                headline_link = item.get("link", "")
+            else:
+                headline_text = item
+                headline_link = ""
 
             # Use cached result if available
             if headline_text in cache["data"]:
@@ -84,15 +94,18 @@ async def get_reddit_links():
                     cache["data"][headline_text] = reddit_link
                     cache["count"] += 1
 
-            # Preserve other fields (link, image, etc.)
+            # Include headline, Reddit link, and original news link
             result = {
                 "headline": headline_text,
-                "reddit_link": reddit_link
+                "reddit_link": reddit_link,
+                "headline_link": headline_link
             }
+
+            # Preserve any extra fields your scraper may include
             if isinstance(item, dict):
-                result.update({k: v for k, v in item.items() if k != "headline"})
+                result.update({k: v for k, v in item.items() if k not in ["headline", "link"]})
+
             results.append(result)
 
     save_cache(cache)
     return results
-

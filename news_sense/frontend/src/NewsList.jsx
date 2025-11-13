@@ -88,6 +88,7 @@ export default function NewsList() {
                 </button>
               )}
             </div>
+
           </div>
         ))}
       </div>
