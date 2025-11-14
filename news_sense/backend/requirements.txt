@@ -1,0 +1,11 @@
+fastapi
+uvicorn
+pymongo
+transformers
+torch
+httpx
+requests
+beautifulsoup4
+python-dotenv
+google-generativeai
+
